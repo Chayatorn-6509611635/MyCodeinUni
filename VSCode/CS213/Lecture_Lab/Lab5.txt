@@ -1,0 +1,99 @@
+1.1 output a: 10 30
+output b: 20 10 30
+output c: 30
+
+1.2 
+เพราะว่า ตอนประกาศ constructor ของ struct a b c แล้ว 
+a จะมี data = 10 และ next = NULL 
+b จะมี data = 20 และ next = NULL
+c จะมี data = 30 และ next = NULL
+เมื่อให้ a->next = c หมายความว่าให้ address ของ next ใน struct a ชี้ไปที่ address ของ struct c และ b->next = a  หมายความว่าให้ address ของ next ใน struct b ชี้ไปที่ address ของ struct a
+เมื่อจบบรรทัดนี้แล้วค่าของstructแต่ละตัวคือ
+แล้วให้ pointer tmp ชี้ไปที่ a b หรือ c 
+a จะมี data = 10 และ next = c 
+b จะมี data = 20 และ next = a
+c จะมี data = 30 และ next = NULL
+เมื่อ Loop แล้ว จะลูปจนกว่าค่าของ tmp->next เป็น NULL
+กรณี tmp = a จะพิมพ์ค่า data ของ a ออกมาก่อน หลังจากนั้น ให้ pointer tmp ชี้ไปที่ next ของ a ซื้อคือ Node c
+ดังนั้นจึงเข้าloop อีกรอบ จะพิมพ์ data ของ c ออกมา แล้ว ให้ tmp ชี้ไปที่ next ของ c ซึ่งคือ NULL ซึ่งจะหลุดloop ออกมา
+กรณี tmp = a จะพิมพ์ค่า dataของ b ก่อน แล้วให้ pointer tmp ชี้ไปที่ next ของ b คือ a แล้ว loop ตามกรณี tmp = a
+กรณี tmp = c จะพิมพ์ค่า data ของ c ก่อน แล้วให้ pointer tmp ชี้ไปที่ next ชอง c คือ  NULL จึงหลุด loop
+
+2.1 
+output: 30 10 20 30 10 20 30 10 20 30 
+
+2.2
+เพราะว่า เมื่อประกาศ constructor struct a b c และ ให้ pointer next ของ a b c ชี้ไป จะได้ว่า
+a จะมี data = 10 และ next = b 
+b จะมี data = 20 และ next = c
+c จะมี data = 30 และ next = a
+และเมื่อให้ tmp = c แล้ว loop เงื่อนไขของ loop คือ ถ้า tmp ถูกชี้ และ i < 10 ซึ่ง i ถูกเซ็ตค่าไว้ที่ 0 แล้วเพิ่มขึ้นเรื่อยๆก่อนจบ loop ดังนั้นจึงหมายความว่า loop ทำซ้ำ 10 ครั้ง ใน loop จะแสดงผล data ของ tmp ซึ่งเป็น c แล้ว เปลี่ยน pointer tmp ให้ไปชี้ที่ next ก็คือ a แล้วเพิ่มค่า i เท่ากับ 1 จะสังเกตได้ว่า next ของ Node จะชี้ไปเป็นcycle ก็คือ a ชี้ไป b b ชี้ไป c c ชี้ไป a ดังนั้นจึงทำซ้ำเรื่อยๆ โดยไม่หลุด loop(ไม่มี next = NULL) แต่เมื่อ loop เรื่อยๆแล้ว ค่า i จะเพิ่มขึ้น 1 ทุกๆการloop 1 ครั้ง เมื่อทำซ้ำ 10 ครั้งแล้ว i จะเท่ากับ 10 ดังนั้นจึงหลุดเงื่อนไข loop เพราะฉะนั้นแล้ว output ที่ออกมา จะเป็นค่า data ของ node c a b c a b c a b c ตามลำดับ
+
+2.3 จะได้ผลลัพธ์เป็น 30 10 20 30 10 20 30 ... ไปเรื่อยๆไม่สิ้นสุดเพราะว่า เงื่อนไขของ loop บอกว่า tmp != NULL ก็คือ ถ้าtmp ถูกชี้ ให้ loop ต่อ ซึ่ง c ชี้ไปที่ a a ชี้ไปที่ b b ชี้ไปที่ c ซึ่งจะถูกชี้เป็น cycle วนไป เมื่อเข้า loop แล้ว address ที่ tmp ชี้ไปจะเป็น a b c a b c ... วนไปเรื่อยๆ ไม่สามารถหลุด loop ไปได้ จึงได้ผลลัพธ์เป็น infinite loop
+
+3.1 output: 10 20 25 25 25 25 25 25 25 25 25 25 25 25 ..... ไม่สิ้นสุด
+
+3.2 เริ่มจากบรรทัดที่ 3
+ประกาศ  a = new Node(10);
+a : data = 10, next = NULL
+ต่อมาบรรทัดที่ 4
+ให้ a->next = new Node(20); a จะมีค่า data เท่าเดิม ส่วน next จะชี้ไปยัง Node ใหม่ที่ถูกจองไว้ใน heap (ซึ่งสมมติให้จองพื้นที่ที่ address 2000)
+a : data = 10, next = 2000
+address 2000 : data = 20, next = NULL
+บรรทัดที่ 5
+ให้ a->next->next = new Node(30); pointer ของ a->next จะชี้ไปที่ Node ที่ถูกจองใหม่ใน heap (สมมติให้จองพื้นที่ที่ addres 3000)
+a : data = 10, next = 2000
+address 2000 : data = 20, next = 3000
+address 3000 : data = 30, next = NULL
+บรรทัดที่ 6
+ประกาศ  b เป็น node ที่มี data 25
+b : data = 25, next = NULL
+ต่อมาบรรทัดที่ 7
+ให้ a->next->next = b แสดงว่า a->next->next (next ของ address ที่ 2000) จะถูกชี้ใหม่ไปที่ b และจะเกิด memory leaks เพราะว่า ที่ๆ a->next->next ไม่ได้ถูก delete แล้วถูกเปลี่ยน address ไป ทำให้ไม่สามารถหา address ที่ 3000ได้อีก
+a : data = 10, next = 2000
+address 2000 : data = 20, next = b
+address 3000 : data = 30, next = NULL //memory leak pointer
+b : data = 25, next = NULL
+และเมื่อมาถึงบรรทัดที่ 8
+ b->next = a->next->next; ค่า next ของ b จะถูกชี้ไปที่ a->next->next (next ของ address ที่ 2000) ซึ่งเป็นการชี้ไปที่ตัวเอง
+a : data = 10, next = 2000
+address 2000 : data = 20, next = b
+b : data = 25, next = b (a->next->next)
+และเมื่อให้ tmp = a และเริ่ม loop เพื่อพิมพ์ data ของ tmp ออกมา จะได้ ตัวแรกเป็นค่าของ a ก็คือ 10 และ ให้ tmp ชี้ไปที่ tmp->next ก็คือ address ที่ 2000 แล้ววน loop ใหม่ ก็จะพิมพ์ data ของ address ที่ 2000 ก็คือ 20 และให้ tmp ชี้ไปที่ tmp->next ก็คือ b แล้ววน loop ใหม่ แล้วจะได้ แสดงผลลัพธ์ของ data ของ b ก็คือ 25 แล้วให้ tmp ชี้ไปที่ tmp->next ก็คือ b เพราะ b ถูกชี้มาที่ตัวเอง แล้ว loop ไปเรื่อยๆ จะได้ 25ต่อมาโดยไม่สิ้นสุด
+
+3.3 output: 10 20 25 30
+เนื่องจากบรรทัดแรกถึงบรรทัดที่ 6 จะได้ตาม 3.2
+a : data = 10, next = 2000
+address 2000 : data = 20, next = 3000
+address 3000 : data = 30, next = NULL
+b : data = 25, next = NULL
+เมื่อบรรทัดที่ 7 เป็น b->next = a->next->next
+next ของ b จะชี้ไปที่ a->next->next(next ของ address 2000) ซึ่งก็คือ address 3000 นั่นเอง
+a : data = 10, next = 2000
+address 2000 : data = 20, next = 3000
+address 3000 : data = 30, next = NULL
+b : data = 25, next = 3000
+และเมื่อบรรทัดที่ 8 เป็น a->next->next = b
+next ของ address 2000 จะชี้มายัง b
+a : data = 10, next = 2000
+address 2000 : data = 20, next = b
+address 3000 : data = 30, next = NULL
+b : data = 25, next = 3000
+และเมื่อ loop 
+จะพิมพ์ค่าเป็น a->data (address 2000)->data b->data และ (address 3000)->dataโดยลำกับ และเมื่อพิมพ์ค่า data ของ address 3000 แล้ว ให้ tmp ชี้ไปที่ tmp->next ซึ่งเท่ากับ NULL ทำให้หลุดloop
+
+4.1 output: 10 10 10 10 10 10 10 ..... ไม่สิ้นสุด
+
+4.2  บรรทัดที่ 3-5 ได้ผลลัพธ์เหมือนข้อ 3
+a: data = 10, next = 2000
+2000: data = 20, next = 3000
+3000: data = 30, next = NULL
+เมื่อเข้า for loop ก็จะทำสิ่งนี้ (for loop expression แรก คือ จุดเริ่มต้น expression ที่สองคือ จุดสิ้นสุด expression ที่สามคือ การดำเนินการ)
+ครั้งที่ 1: tmp = a; a->next->next = 3000
+ครั้งที่ 2: tmp = a->next; a->next->next->next = NULL //หลุดเงื่อนไข
+ซึ่งเมื่อหลุด loop แล้ว tmp ตอนนี้จะยังชี้ไปที่ a->next ไม่ได้  reset pointer
+ดังนั้น tmp->data จะได้เป็น 20
+
+4.3 บรรทัดที่ 7: เป็นการ loop ซึ่งเริ่มจากให้ tmp = a แล้วให้ tmp เข้าถึง tmp->next ไปเรื่อยๆจนกว่า tmp->next->next จะเท่ากับ NULL ซึ่งเมื่อหลุด loop แล้ว tmp จะชี้ไปที่ a->next
+บรรทัดที่ 9: ให้เคลียร์ข้อมูลที่เป็น  value ของ tmp->next ซึ่งคือ a->next->next->data
+บรรทัดที่ 10: ให้ tmp->next = NULL ก็คือให้ next ไม่ถูกชี้ไปที่ไหนเลย ดังนั้น a->next->next = NULL แล้ว data ในนั้นก็จะหายไป

@@ -1,0 +1,45 @@
+import math
+
+def frame(points,i,j):
+    x = points[2*i]
+    y = points[2*j+1]
+    w = abs(points[2*j]-x)
+    h = abs(points[2*i+1]-y)
+    return [x,y,w,h]
+
+def middle(points,i,j):
+    pi = [points[2*i],points[2*i+1]]
+    pj = [points[2*j],points[2*j+1]]
+    x = (pi[0]+pj[0])/2
+    y = (pi[1]+pj[1])/2
+    return [x,y]
+
+def frame_area(points,i,j):
+    aframe = frame(points,i,j)
+    a = aframe[2]*aframe[3]
+    return float(a)
+
+def distance(points,i,j):
+    dframe = frame(points,i,j)
+    d = math.sqrt(pow(dframe[2],2)+pow(dframe[3],2))
+    return d
+
+def intersection(points,p1,p2,p3,p4):
+    po1 = [points[2*p1],points[2*p1+1]]
+    po2 = [points[2*p2],points[2*p2+1]]
+    po3 = [points[2*p3],points[2*p3+1]]
+    po4 = [points[2*p4],points[2*p4+1]]
+    m1 = (po1[1]-po2[1])/(po1[0]-po2[0])
+    m2 = (po3[1]-po4[1])/(po3[0]-po4[0])
+    b1 = po1[1]-(m1*po1[0])
+    b2 = po3[1]-(m2*po3[0])
+    x = (b2-b1)/(m1-m2)
+    y = (m1*x)+b1
+    return [x,y]
+
+points=[1,1,2,2,3,3,4,5,7,8,1,5,3,1]
+print(frame(points,1,3))
+print(middle(points,0,2))
+print(frame_area(points,1,3))
+print(distance(points,1,2))
+print(intersection(points,5,6,1,2))

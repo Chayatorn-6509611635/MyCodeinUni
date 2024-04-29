@@ -1,0 +1,1 @@
+puts [gets.chomp].pack('B*')

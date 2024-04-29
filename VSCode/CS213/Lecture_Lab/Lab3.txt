@@ -1,0 +1,41 @@
+1.1 output:
+Error: open file for output failed!
+1.2 เพราะว่ามันไม่มีไฟล์ my_actiivity.txt ให้อ่าน
+1.3 Lab3-1.exe
+
+2.1 output:
+ไม่ขึ้น
+2.2 Lab3-2.exe และ my_activity.txt(เกิดจากการรันโปรแกรม)
+2.3 My_yesterday_activities:
+9:00AM,Had_breakfast_(Boiled_eggs).
+1:30PM,Took_CS348_Class.
+5:00PM,Read_books_with_friends.
+
+3.1 output:
+My_yesterday_activities:
+9:00AM,Had_breakfast_(Boiled_eggs).
+1:30PM,Took_CS348_Class.
+5:00PM,Read_books_with_friends.
+3.2 เพราะว่า3.1ไม่มีไฟล์my_activity.txt ให้อ่าน แต่ 3.3มีfile my_activity.txt จากการรัน 3.2 ให้อ่าน
+
+4.1
+#include<iostream>
+#include<fstream>
+#include<cstdlib>
+#include<string>
+using namespace std;
+int main(int argc, char** argv){
+	string filename = "my_activities.txt";
+	ofstream fout(filename.c_str(), ios::out);
+	if(!fout){
+		cerr << "Error: open file for output failed!" << endl;
+		abort();
+	}
+	for(int i = 0; i < 3; i++){
+		string line;
+		getline(cin, line);
+		fout << line << endl;
+	}
+	fout.close();
+	return 0;
+}

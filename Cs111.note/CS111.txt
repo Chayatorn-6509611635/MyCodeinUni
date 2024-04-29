@@ -1,0 +1,11 @@
+Protected เห็นได้แค่คลาสพ่อลูกกัน คนอื่นไม่เห็น
+
+เรียก constructor ที่อยู่ใน superclass
+	- statementแรกใน subclass constructor
+
+syntax:
+subclass (parameter){
+	super(parameter)
+}
+
+ใน java ถ้าไม่ extend class ใด จะ extend โดยปริยาย

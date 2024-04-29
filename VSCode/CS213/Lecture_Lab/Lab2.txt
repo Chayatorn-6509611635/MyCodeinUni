@@ -1,0 +1,22 @@
+1.1 output:
+0x7c1560
+8133216
+
+1.2 ไม่ถูกต้อง เพราะว่าค่าของ result ชี้ไปยัง addressใหม่ที่ถูกจอง(new)ใน heap  และเมื่อใช้คำสั่ง delete จะเป็นการลบค่าใน address ที่ถูกจองใน heap ทำให้ค่าใน address นั้นกลายเป็นค่าขยะ และถูก return ออกมาเป้นค่า address ของ x
+
+2.1 output:
+0x751560
+15348928
+
+2.2 ไม่ถูกต้อง เพราะ เมื่อ result ชี้ไปยัง address ใหม่ที่ถูกจองใน heap เมื่อ delete result ค่าที่ result ชี้ไป จะถูกลบ กลายเป็นค่าขยะ เมื่อ returnออกมาจะกลายเป็น address ของ x และเมื่อค่าใน address ของ x คูณ 2 แล้ว ก็เป็นการคูณค่าขยะด้วยสอง
+
+3.1 output: 
+0x6ffddc
+0 	
+
+3.2 ไม่ถูกต้อง เพราะว่าใน fuction rectangleArea4 เราประกาศ local variable เป็น result และเมื่อreturn ค่า address ของ result แล้ว จะจบการทำงานของฟังก์ชัน แล้ว ค่าของ result จะถูกลบออก
+
+4.1 0x7e1560
+8264298
+
+4.2 ไม่ถูกต้อง เพราะ x = rectangleArea2(&a, b); จะได้ค่า address ของ result และเมื่อ assign address y = x ก้คือให้ y ชี้ไปที่เดียวกับ x เมื่อ delete y ค่าที่y ชี้ไป จะถูกทำลาย ซึ่งเป็น address เดียวกับที่ x ชี้ไป จึงได้ค่าขยะ

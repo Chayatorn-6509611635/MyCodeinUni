@@ -1,0 +1,87 @@
+form, header, footer {
+    font-family: sans-serif;
+    font-size: 1.2em;
+    padding: 0.5em 1em;
+    position: relative;
+}
+
+.ok {
+  background-color: rgba(80, 120, 80, 0.1);
+}
+
+body {
+    background-color: rgba(111, 78, 55, 0.1);
+    padding: 0;
+    margin: 0;
+}
+
+form, input {
+    font-family: monospace
+}
+
+input {
+    padding: 4px 6px;
+    font-size: 1em;
+    width: 5em;
+    border-radius: 0;
+    border: solid 1px rgba(111, 78, 55, 0.3);
+    background-color: rgba(131, 98, 75, 0.2);
+    text-align: right;
+}
+
+header, footer {
+    background-color: rgb(111, 78, 55);
+    color: white
+}
+
+footer a {
+    color: white;
+    padding: 10px 4px
+}
+
+img {
+    position: absolute;
+    bottom: -30%;
+    right: 24px;
+    width: 20%
+}
+
+#cigarette {
+    bottom: 0;
+    width: 20%;
+    right: 26px;
+}
+
+h1 {
+    font-size: 1.6em
+}
+
+hr {
+    margin: 20px;
+    color: white
+}
+
+.op {
+    font-size: 1.4em;
+}
+
+.quantity {
+    width: 3em;
+    font-size: 1.2em;
+    text-align: right;
+}
+
+.total {
+    width: 4em;
+    font-size: 1.2em;
+    font-weight: normal;
+}
+
+.warn {
+    background-color: rgba(255, 20, 20, 0.6);
+    min-width: 50%;
+    max-width: 300px;
+    margin-left: -20px;
+    color: white;
+    padding: 20px;
+}

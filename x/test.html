@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+  <head lang="en">
+    <meta charset="utf-8" />
+    <title>Consumption Calculator</title>
+    <!-- jQuery, AngularJS, CoffeeScript -->
+    <script data-require="jquery@*" data-semver="2.0.3" src="https://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/coffee-script/1.6.3/coffee-script.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+    <script>document.write('<base href="' + document.location + '" />');</script>
+    <script type="text/coffeescript" src="app.coffee"></script>
+  </head> 
+
+  <body ng-controller="AppCtrl" ng-cloak="">
+    <header>
+      <h1>Angular Consumption Calculator</h1>
+      <p>Today,</p>
+    </header>
+    
+    <form calculator data="{perUnit: 107.5, quantity: 0}" max-daily=400>
+      <p>
+        <span>I had</span>
+        <input class='quantity' name='quantity' type='number' ng-model='data.quantity' 
+          user-input='adjustCalculator' round-to='0' min=0>
+        <label>cups of coffee</label>
+      </p>
+      <div ng-hide='isNoneConsumed()'>
+        <p>
+          <span class='op'>×</span>
+          <input name='perUnit' type='number' ng-model='data.perUnit' 
+            user-input='adjustCalculator' round-to='1' min=10 step=10>
+          <label><span class='unit'>mg of caffeine per cup</label>
+        </p>
+        <p>
+          <span class='op'>≈</span>
+          <input class='total' name='total' type='number' ng-model='data.total' step=100
+            user-input='adjustCalculator' round-to='0' min=0>
+            <label><b>mg of caffeine.</b></label>
+        </p>
+        <p class='warn' ng-show='isMaximumExceeded()'>
+          You have <b>exceeded</b> the daily maximum intake of {{maxDaily}}mg.
+        </p>
+        <img src='http://www.unixstickers.com/image/cache/data/stickers/coffeescript/Coffeescript.sh-600x600.png'>
+      </div>  
+    </form>
+    <hr>
+    <form calculator data="{perUnit: 10, quantity: 0}" max-daily=30>
+      <p>
+        <span>I had</span>
+        <input class='quantity' name='quantity' type='number' ng-model='data.quantity' 
+          user-input='adjustCalculator' round-to='0' min=0>
+        <label>cigarettes</label>
+      </p>
+      <div ng-hide='isNoneConsumed()'>
+        <p>
+          <span class='op'>×</span>
+          <input name='perUnit' type='number' ng-model='data.perUnit' 
+            user-input='adjustCalculator' round-to='1' min=0>
+          <label>mg of tar per cigarette</label>  
+        </p>
+        <p>
+          <span class='op'>≈</span>
+          <input class='total' name='total' type='number' ng-model='data.total' step=10
+            user-input='adjustCalculator' round-to='0' min=0>
+          <label><b>mg of tar.</b></label>
+        </p>
+        <p class='warn' ng-show='isMaximumExceeded()'>
+          You have <b>exceeded</b> the daily maximum intake of {{maxDaily}}mg.
+        </p>
+        <img id='cigarette' ng-show='isMaximumExceeded()' src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/No_smoking_symbol.svg/600px-No_smoking_symbol.svg.png">
+    </div>
+    </form>
+    <div><p></p></div>
+    <footer>
+      by <a href="https://twitter.com/global_sqa" target="_blank">@GlobalSQA</a>
+    </footer>
+  </body>
+</html>

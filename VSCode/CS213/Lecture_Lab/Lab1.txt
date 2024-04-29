@@ -1,0 +1,29 @@
+1.1 output: no output
+
+1.2 เพราะว่าการกำหนดค่า int *x หมายความว่า กำหนดให้ x เป็นpointer ซึ่งเมื่อเรา assign ให้  *x = 10 หมายความว่า เราจะกำหนดค่า ที่ x ชี้ไปให้เป็น 10 แต่ x เป็น pointer ที่ยังไม่ถูกชี้ ดังนั้น โปรแกรมจึงไม่แสดงค่า และ terminate ตัวเอง และ return ค่าที่ไม่ใช่ 0 เนื่องจากโปรแกรมทำงานไม่เสร็จสมบูรณ์
+
+
+2.1 output: 
+25
+36
+49
+
+2.2 stack variables: w : int, result : int
+
+
+3.1.output: 
+0xbd1500 21
+7 3
+
+3.2 3ตัว 
+int* x
+int* result
+char **argv
+
+
+4.1 output:
+0xbe1500 21
+7 4
+
+4.2 เริ่มต้น int a = 7, b = 3 คือ ให้ค่า a เป็น 7 และ b เป็น 3 ต่อมา assign ค่า  *x = rectangleArea2(&a, b)  ให้ pointer x ชี้ไปที่ address ที่return จากfuncfion rectangleArea2 ซึ่งรับต่า parameter w เป็น pointer และ h เป็น address ซึ่ง pointer ของ w จะชี้ไปที่ address ของ a และ assign ให้ address ของ h เท่ากับ address ของ b และในฟังก์ชัน rectangleArea2 มีการ initialize pointer ของ result ซึ่งชี้ไปยัง address ที่สร้างใหม่ใน heap
+และ ค่าของ result(New address in heap) ที่ชี้ไปมีค่าเท่ากับ ค่าของ w ที่ชี้ไปยัง address ของ a คูณกับ h ซึ่งเป็นค่าที่มี address เดียวกับ b หลังจากนั้นโปรแกรมสั่ง  w++ ก็คือให้ address ที่ w ชี้ไป +1 ก็คือ ชี้ไปยัง address ถัดไป 4 bytes ซึ่ง address ของ a จะเป็นคนละ address กับ w ซึ่งค่าของ a ยังเท่ากับ 7 เหมือนเดิม แต่ ค่าของ w เป็นค่าของaddress ที่ถัดจาก a ไป 4 byte ต่อมาให้ h++ ก็คือ ให้ค่าของ h เพิ่มขึ้น 1 ดังนั้นค่าของ h จึงกลายเป็น 4 ซึ่ง h มี address เดียวกับ b ดังนั้น b ก็มีค่าเท่ากับ 4 ด้วย ดังนั้น a จึงมีค่าเท่ากับ 7 และ b มีค่าเท่ากับ 4
