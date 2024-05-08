@@ -36,6 +36,7 @@ int main(){
 
     for(int i = 1; i < N; i++){
         m[i][i] = 0;
+        s[i][i] = 0;
     }
 
     for(int l = 2; l < N; l++){
