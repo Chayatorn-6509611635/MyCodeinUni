@@ -11,5 +11,6 @@ int main()
 {
     mainx();
     char myWord[5] = {'L','i','s','a'};
-    printf("%s",myWord);
+    printf("%s\n",myWord);
+    printf("%c",myWord[6]);
 }
