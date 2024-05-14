@@ -14,6 +14,10 @@ public class Bank {
 	}
 	
 	public Account getAccount(int index) {
+		if(index < 0 || index >= accountList.size()) {
+			System.err.println("Out of Bound.");
+			return null;
+		}
 		return accountList.get(index);
 	}
 	
